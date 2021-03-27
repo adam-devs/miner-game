@@ -19,6 +19,9 @@ public class BombBlock extends Block {
       g.fillRect(x, y, Game.blockSize, Game.blockSize);
       g.setColor(new Color(168, 33, 33));
       g.fillRect(x + 3, y + 3, Game.blockSize - 6, Game.blockSize - 6);
+    } else {
+      g.setColor(new Color(137, 103, 103));
+      g.fillRect(x + 3, y + 3, Game.blockSize - 6, Game.blockSize - 6);
     }
   }
 
@@ -29,12 +32,13 @@ public class BombBlock extends Block {
 
 
   public void blockAttribute() {
-    // Should reduce the miner health;
+    HUD.HEALTH-= 10;
     System.out.println("Ouch");
   }
 
   public void setMined(){
     this.isMined = true;
     blockAttribute();
+
   }
 }

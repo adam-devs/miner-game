@@ -11,6 +11,7 @@ public class KeyInput extends KeyAdapter {
 
   public void keyPressed(KeyEvent e) {
     int key = e.getKeyCode();
+    int amount = 7;
 
     for (int i = 0; i < handler.objects.size(); i++) {
       GameObject tempObject = handler.objects.get(i);
@@ -19,16 +20,16 @@ public class KeyInput extends KeyAdapter {
         // key events for players
 
         if (key == KeyEvent.VK_W) {
-          tempObject.setVelY(5);
+          tempObject.setVelY(-amount);
         }
         if (key == KeyEvent.VK_S) {
-          tempObject.setVelY(-5);
+          tempObject.setVelY(amount);
         }
         if (key == KeyEvent.VK_D) {
-          tempObject.setVelX(5);
+          tempObject.setVelX(amount);
         }
         if (key == KeyEvent.VK_A) {
-          tempObject.setVelX(-5);
+          tempObject.setVelX(-amount);
         }
       }
     }
@@ -44,18 +45,22 @@ public class KeyInput extends KeyAdapter {
         // key events for players
 
         if (key == KeyEvent.VK_W) {
+          tempObject.setY(Game.roundTo50(tempObject.getY()));
           tempObject.setVelX(0);
           tempObject.setVelY(0);
         }
         if (key == KeyEvent.VK_S) {
+          tempObject.setY(Game.roundTo50(tempObject.getY()));
           tempObject.setVelX(0);
           tempObject.setVelY(0);
         }
         if (key == KeyEvent.VK_D) {
+          tempObject.setX(Game.roundTo50(tempObject.getX()) + 12);
           tempObject.setVelX(0);
           tempObject.setVelY(0);
         }
         if (key == KeyEvent.VK_A) {
+          tempObject.setX(Game.roundTo50(tempObject.getX()) + 12);
           tempObject.setVelX(0);
           tempObject.setVelY(0);
         }

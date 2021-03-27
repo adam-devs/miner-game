@@ -18,6 +18,9 @@ public class O2Block extends Block {
       g.fillRect(x, y, Game.blockSize, Game.blockSize);
       g.setColor(new Color(33, 168, 152));
       g.fillRect(x + 3, y + 3, Game.blockSize - 6, Game.blockSize - 6);
+    } else {
+      g.setColor(new Color(100, 135, 132));
+      g.fillRect(x + 3, y + 3, Game.blockSize - 6, Game.blockSize - 6);
     }
   }
 
@@ -28,7 +31,7 @@ public class O2Block extends Block {
 
   @Override
   public void blockAttribute() {
-    // Should increase Oxygen levels by certain level
+    HUD.OXYGEN+=5;
   }
 
   public void setMined(){

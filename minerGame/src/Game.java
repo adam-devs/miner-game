@@ -8,8 +8,9 @@ public class Game extends Canvas implements Runnable {
   public static final int height = roundTo50(width / 12 * 9);
 
   public static final int blockSize = 50;
+  private Random r;
 
-  private static int roundTo50(int x) {
+  public static int roundTo50(int x) {
     if (x % 50 < 25) {
       return x - (x % 50);
     } else if (x % 50 > 25) {
@@ -25,6 +26,8 @@ public class Game extends Canvas implements Runnable {
 
   private Handler handler;
 
+  private Block[][] blocks;
+
   public Game() {
     new Window(width, height, "Miner Game", this);
 
@@ -32,7 +35,7 @@ public class Game extends Canvas implements Runnable {
     this.addKeyListener(new KeyInput(handler));
 
     // blocks added:
-    Block[][] blocks = new Block[width / 50][height / 50];
+    blocks = new Block[width / 50][height / 50];
 
     int offset = height / 4;
 
@@ -43,25 +46,27 @@ public class Game extends Canvas implements Runnable {
       }
     }
 
-    Random r = new Random();
-    int x, y;
+    r = new Random();
+    int x;
+    int y;
+    int n = 10;
 
     // 5 Gold Blocks
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 10; i++) {
       x = r.nextInt(blocks.length);
       y = r.nextInt(blocks[0].length);
       blocks[x][y] = new GoldBlock(x * 50, y * 50 + offset, ID.GOLD_BLOCK);
     }
 
     // 5 Bomb Blocks
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 10; i++) {
       x = r.nextInt(blocks.length);
       y = r.nextInt(blocks[0].length);
       blocks[x][y] = new BombBlock(x * 50, y * 50 + offset, ID.BOMB_BLOCK);
     }
 
     // 5 O2 Blocks
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 10; i++) {
       x = r.nextInt(blocks.length);
       y = r.nextInt(blocks[0].length);
       blocks[x][y] = new O2Block(x * 50, y * 50 + offset, ID.O2BLOCK);
@@ -78,9 +83,16 @@ public class Game extends Canvas implements Runnable {
 
     handler.addObject(new Ground(0, 0));
 
-    handler.addObject(new Miner(width / 2, height / 2, ID.MINER, handler));
+    handler.addObject(new Miner(roundTo50(width / 2) + 12, 100, ID.MINER, handler));
 
     handler.addObject(new HUD(0, 0, null));
+  }
+
+  public void moveUp() {
+
+    handler.moveObjects();
+
+    // TODO: make new objects under this place too.
   }
 
   public synchronized void start() {
@@ -136,6 +148,9 @@ public class Game extends Canvas implements Runnable {
     }
 
     Graphics g = bs.getDrawGraphics();
+
+    g.setColor(new Color(113, 102, 98));
+    g.fillRect(0, 0, width, height);
 
     handler.render(g);
 

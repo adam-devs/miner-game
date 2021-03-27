@@ -18,6 +18,9 @@ public class GoldBlock extends Block {
       g.fillRect(x, y, Game.blockSize, Game.blockSize);
       g.setColor(new Color(168, 133, 33));
       g.fillRect(x + 3, y + 3, Game.blockSize - 6, Game.blockSize - 6);
+    } else {
+      g.setColor(new Color(147, 135, 99));
+      g.fillRect(x, y, Game.blockSize, Game.blockSize);
     }
   }
 
@@ -27,7 +30,9 @@ public class GoldBlock extends Block {
   }
 
   @Override
-  public void blockAttribute() {}
+  public void blockAttribute() {
+    HUD.score += 100;
+  }
 
   public void setMined() {
     this.isMined = true;

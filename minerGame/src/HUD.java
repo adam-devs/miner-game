@@ -1,50 +1,54 @@
 import java.awt.*;
 
-
 public class HUD extends GameObject {
   public static int HEALTH = 100;
   public static int OXYGEN = 100;
+  private int countdown = 0;
+  public static int score = 0;
 
   public HUD(int x, int y, ID id) {
     super(x, y, id);
   }
 
-
   @Override
-  public void tick(){
-    HEALTH--;
-    OXYGEN--;
-    HEALTH = Game.clamp(HEALTH,0,100);
-    HEALTH = Game.clamp(OXYGEN,0,100);
+  public void tick() {
+    countdown++;
+    System.out.println(countdown);
 
+    if (countdown % 100 == 0) {
+      OXYGEN--;
+    }
 
+    HEALTH = Game.clamp(HEALTH, 0, 100);
+    OXYGEN = Game.clamp(OXYGEN, 0, 100);
+    //score++;
   }
 
   @Override
-  public void render(Graphics g){
+  public void render(Graphics g) {
+    int margin = 20;
 
     // Health
     g.setColor(Color.BLACK);
-    g.drawString("Health level: " + HEALTH, 10, 10);
+    g.drawString("Health level: " + HEALTH, margin, margin);
     g.setColor(Color.red);
-    g.fillRect(10, 20, 100 * 2, 20);
+    g.fillRect(margin, margin + 10, 100 * 2, 20);
     g.setColor(Color.green);
-    g.fillRect(10, 20, HEALTH * 2, 20);
+    g.fillRect(margin, margin + 10, HEALTH * 2, 20);
     g.setColor(Color.BLACK);
-    g.drawRect(10, 20, 100 * 2, 20);
+    g.drawRect(margin, margin + 10, 100 * 2, 20);
 
-    // Miner
-
+    // Oxygen
     g.setColor(Color.BLACK);
-    g.drawString("Oxygen level: " + OXYGEN, Game.width - 200 - 10, 10);
+    g.drawString("Oxygen level: " + OXYGEN, Game.width - 200 - margin, margin);
     g.setColor(Color.red);
-    g.fillRect(Game.width - 200 - 10, 20, 100 * 2, 20);
+    g.fillRect(Game.width - 200 - margin, margin + 10, 100 * 2, 20);
     g.setColor(Color.green);
-    g.fillRect(Game.width - 200 - 10, 20, OXYGEN * 2, 20);
+    g.fillRect(Game.width - 200 - margin, margin + 10, OXYGEN * 2, 20);
     g.setColor(Color.BLACK);
-    g.drawRect(Game.width - 200 - 10, 20, 100 * 2, 20);
+    g.drawRect(Game.width - 200 - margin, margin + 10, 100 * 2, 20);
 
-
+    g.drawString("Score: " + score, Game.width / 2 - 32, margin);
   }
 
   @Override
