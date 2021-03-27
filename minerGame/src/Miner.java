@@ -48,17 +48,18 @@ public class Miner extends GameObject {
             obj.setMined();
           }
 
-          if (tempObject.id == ID.GOLD){
-            if(getBounds().intersects(tempObject.getBounds())){
-              NormalBlock obj = (NormalBlock) tempObject;
+          if (tempObject.id == ID.GOLD_BLOCK) {
+            if (getBounds().intersects(tempObject.getBounds())) {
+              GoldBlock obj = (GoldBlock) tempObject;
               obj.setMined();
             }
 
-            if (tempObject.id == ID.O2BLOCK){
-              if(getBounds().intersects(tempObject.getBounds())){
-                (BombBlock) tempObject.setMined();
+            if (tempObject.id == ID.BLOCK) {
+              if (getBounds().intersects(tempObject.getBounds())) {
+                NormalBlock obj = (NormalBlock) tempObject;
+                obj.setMined();
               }
-              }
+            }
             }
 }
 
