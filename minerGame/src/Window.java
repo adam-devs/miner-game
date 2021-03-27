@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 
 public class Window extends Canvas {
 
-  public Window(int w, int h, String title,Game game) {
+  public Window(int w, int h, String title, Game game) {
     JFrame frame = new JFrame(title);
 
     frame.setPreferredSize(new Dimension(w, h));
@@ -16,9 +16,5 @@ public class Window extends Canvas {
     frame.add(game);
     frame.setVisible(true);
     game.start();
-
   }
-
-
-
 }

@@ -3,6 +3,7 @@ import java.util.LinkedList;
 
 public class Handler {
   LinkedList<GameObject> objects = new LinkedList<>();
+  private int size = 0;
 
   public void tick() {
     for (GameObject tempObject : objects) {
@@ -18,9 +19,13 @@ public class Handler {
 
   public void addObject(GameObject object) {
     this.objects.add(object);
+
   }
 
   public void removeObject(GameObject object) {
     this.objects.remove(object);
   }
+
+
+
 }
