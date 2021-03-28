@@ -32,7 +32,7 @@ public class Miner extends GameObject {
     if (HUD.OXYGEN == 0 || HUD.HEALTH == 0) {
       Game.stop();
     }
-    if (getY() > 500) {
+    if (getY() >= 500) {
       setY(getY() - 200);
       Game.moveUp();
     }

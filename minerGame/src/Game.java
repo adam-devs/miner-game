@@ -27,7 +27,7 @@ public class Game extends Canvas implements Runnable {
   private static Thread thread;
   private static boolean running = false;
 
-  private static Block[][] blocks = new Block[width / 50][height / 50 + 4];
+  private static Block[][] blocks = new Block[width / 50][height / 50 + 8];
 
   public Game() {
     new Window(width, height, "Miner Game", this);
@@ -46,7 +46,7 @@ public class Game extends Canvas implements Runnable {
       // initialises blocks
       for (int i = 0; i < blocks.length; i++) {
         for (int j = 0; j < blocks[0].length; j++) {
-          blocks[i][j] = new NormalBlock(i * 50, j * 50 + offset, ID.BLOCK);
+          blocks[i][j] = randomBlock(i * 50, j * 50 + offset);
         }
       }
 
@@ -61,7 +61,7 @@ public class Game extends Canvas implements Runnable {
         blocks[x][y] = new GoldBlock(x * 50, y * 50 + offset, ID.GOLD_BLOCK);
       }
 
-      // 15 Bomb Blocks
+      // 30 Bomb Blocks
       for (int i = 0; i < 30; i++) {
         x = r.nextInt(blocks.length);
         y = r.nextInt(blocks[0].length);
@@ -142,7 +142,7 @@ public class Game extends Canvas implements Runnable {
         if (blocks[i][j].getY() < 0) {
           handler.removeObject(blocks[i][j]);
           GameObject temp = blocks[i][j];
-          blocks[i][j] = randomBlock(temp.getX(), temp.getY() + 300);
+          blocks[i][j] = randomBlock(temp.getX(), temp.getY() + 800);
           handler.addObject(blocks[i][j]);
         }
       }
