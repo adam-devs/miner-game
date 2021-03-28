@@ -8,10 +8,17 @@ public class Miner extends GameObject {
   Handler handler;
 
   private final int size = Game.blockSize / 2;
+  Image image;
 
   public Miner(int x, int y, ID id, Handler handler) {
     super(x, y, id);
     this.handler = handler;
+    try {
+      File file = new File("/Users/adama/Downloads/miner-game/minerGame/src/miner.png");
+      this.image = ImageIO.read(file);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -22,8 +29,12 @@ public class Miner extends GameObject {
     x = Game.clamp(x, 0, Game.width - 50);
     y = Game.clamp(y, 0, Game.height - 50);
     collision();
-    if (y > 500) {
-      handler.moveObjects();
+    if (HUD.OXYGEN == 0 || HUD.HEALTH == 0) {
+      Game.stop();
+    }
+    if (getY() > 500) {
+      setY(getY() - 200);
+      Game.moveUp();
     }
   }
 
@@ -66,17 +77,9 @@ public class Miner extends GameObject {
   @Override
   public void render(Graphics g) {
 
-    // miner
-    //    BufferedImage image = null;
-    //    try {
-    //      File file = new File("/Users/adama/Downloads/miner-game/minerGame/src/avatar.png");
-    //      image = ImageIO.read(file);
-    //    } catch (IOException e) {
-    //      e.printStackTrace();
-    //    }
+//  miner
     g.setColor(Color.blue);
-    //    g.drawImage(image, getX(), getY(), size, size, null);
-    g.fillRect(getX(), getY(), size, size);
+    g.drawImage(image, getX(), getY(), size, size, null);
   }
 
   @Override

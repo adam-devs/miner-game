@@ -13,7 +13,7 @@ public class HUD extends GameObject {
   @Override
   public void tick() {
     countdown++;
-    System.out.println(countdown);
+    //System.out.println(countdown);
 
     if (countdown % 100 == 0) {
       OXYGEN--;

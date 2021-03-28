@@ -1,11 +1,21 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class GoldBlock extends Block {
 
   protected boolean isMined = false;
+  Image image;
 
   public GoldBlock(int x, int y, ID id) {
     super(x, y, id);
+    try {
+      File file = new File("/Users/adama/Downloads/miner-game/minerGame/src/ethereum.png");
+      this.image = ImageIO.read(file);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -14,13 +24,9 @@ public class GoldBlock extends Block {
   @Override
   public void render(Graphics g) {
     if (!isMined) {
-      g.setColor(new Color(99, 76, 19));
+      g.setColor(new Color(57, 66, 104));
       g.fillRect(x, y, Game.blockSize, Game.blockSize);
-      g.setColor(new Color(168, 133, 33));
-      g.fillRect(x + 3, y + 3, Game.blockSize - 6, Game.blockSize - 6);
-    } else {
-      g.setColor(new Color(147, 135, 99));
-      g.fillRect(x, y, Game.blockSize, Game.blockSize);
+      g.drawImage(image, x + 3, y + 3, 44, 44, null);
     }
   }
 
