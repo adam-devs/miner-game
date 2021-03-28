@@ -1,7 +1,5 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class Miner extends GameObject {
@@ -14,8 +12,7 @@ public class Miner extends GameObject {
     super(x, y, id);
     this.handler = handler;
     try {
-      File file = new File("/Users/adama/Downloads/miner-game/minerGame/src/miner.png");
-      this.image = ImageIO.read(file);
+      this.image = ImageIO.read(getClass().getResourceAsStream("pictures/avatar.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -77,9 +74,9 @@ public class Miner extends GameObject {
   @Override
   public void render(Graphics g) {
 
-//  miner
+    //  miner
     g.setColor(Color.blue);
-    g.drawImage(image, getX(), getY(), size, size, null);
+    g.drawImage(image, getX() - size / 2, getY() - size / 2, size * 2, size * 2, null);
   }
 
   @Override

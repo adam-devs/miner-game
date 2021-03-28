@@ -11,8 +11,7 @@ public class GoldBlock extends Block {
   public GoldBlock(int x, int y, ID id) {
     super(x, y, id);
     try {
-      File file = new File("/Users/adama/Downloads/miner-game/minerGame/src/ethereum.png");
-      this.image = ImageIO.read(file);
+      this.image = ImageIO.read(getClass().getResourceAsStream("pictures/ethereum.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -11,8 +11,7 @@ public class BombBlock extends Block {
   public BombBlock(int x, int y, ID id) {
     super(x, y, id);
     try {
-      File file = new File("/Users/adama/Downloads/miner-game/minerGame/src/bomb.png");
-      this.image = ImageIO.read(file);
+      this.image = ImageIO.read(getClass().getResourceAsStream("pictures/bomb.png"));
     } catch (IOException e) {
       e.printStackTrace();
     }
